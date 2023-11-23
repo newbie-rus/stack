@@ -1,4 +1,4 @@
-#include "stack.h"
+#include "../include/stack.h"
 
 static const char *err_msgs_arr[] = {
   "NO ERROR.\n",
@@ -20,8 +20,8 @@ static const char *err_msgs_arr[] = {
 int StackCtor(Stack *stk, size_t capacity)
 {
 
-  my_assert(capacity > 0, UNREAL_VALUE);
-  my_assert(stk != NULL, PATH_NULL);
+  assert(capacity > 0);
+  assert(stk != NULL);
   
   stk->capacity = capacity;
 
@@ -41,13 +41,13 @@ int StackCtor(Stack *stk, size_t capacity)
   stk->data = (ELEM_T *)calloc(capacity, sizeof(ELEM_T));
 #endif
   
-  my_assert(stk->data != NULL, PATH_NULL);
-  my_assert(stk->capacity > 0, UNREAL_VALUE);
+  assert(stk->data != NULL);
+  assert(stk->capacity > 0);
 
   stk->size = VENOM_SIZE;
 
   ELEM_T *data_memset = my_memset(stk->data, VENOM_ELEM, stk->capacity);
-  my_assert(data_memset != NULL, PATH_NULL);
+  assert(data_memset != NULL);
 
 #ifdef DEBUG_CHECK
   stk->hash = hash_control(stk);
@@ -59,7 +59,7 @@ int StackCtor(Stack *stk, size_t capacity)
 
 int StackDtor(Stack *stk)
 {
-  my_assert(stk != NULL, PATH_NULL);
+  assert(stk != NULL);
   ASSERT_STACK(stk);
 
 #ifdef DEBUG_CHECK
@@ -80,7 +80,7 @@ int StackDtor(Stack *stk)
 
 int StackPush(Stack *stk, ELEM_T elem)
 {
-  my_assert(stk != NULL, PATH_NULL);
+  assert(stk != NULL);
 
   if (stk->size == stk->capacity){
     StackReallocIncrease(stk);
@@ -100,10 +100,10 @@ int StackPush(Stack *stk, ELEM_T elem)
 int StackPop(Stack *stk)
 
 {
-  my_assert(stk != NULL, PATH_NULL);
+  assert(stk != NULL);
   ASSERT_STACK(stk);
   
-  printf("StackPop:: <" ELEM_MOD ">\n", stk->data[stk->size - 1]);
+  printf("StackPop::  <" ELEM_MOD ">\n", stk->data[stk->size - 1]);
 
   stk->data[stk->size - 1] = VENOM_ELEM;
   stk->size--;
@@ -122,7 +122,7 @@ int StackPop(Stack *stk)
 
 int StackReallocIncrease(Stack *stk)
 {
-  my_assert(stk != NULL, PATH_NULL);
+  assert(stk != NULL);
   ASSERT_STACK(stk);
   
   stk->capacity = stk->capacity * 2;
@@ -147,7 +147,7 @@ int StackReallocIncrease(Stack *stk)
 
 int StackReallocDecrease(Stack *stk)
 {
-  my_assert(stk != NULL, PATH_NULL);
+  assert(stk != NULL);
   stk->capacity = stk->capacity / REALLOC_FACTOR_DECREASE;
 
 #ifdef DEBUG_CHECK

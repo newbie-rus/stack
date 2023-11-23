@@ -1,5 +1,4 @@
-#include <assert.h>
-#include "stack.h"
+#include "../include/stack.h"
 
 ELEM_T *my_memset(ELEM_T *destination, ELEM_T elem, size_t size)
 {

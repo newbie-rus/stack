@@ -1,6 +1,5 @@
 #include <math.h>
-#include <assert.h>
-#include "stack.h"
+#include "../include/stack.h"
 
 #ifdef DEBUG_CHECK
 static const char *gnt_polynom = "00000100110000010001110110110111";
