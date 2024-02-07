@@ -5,25 +5,26 @@
 #include <string.h>
 #include <stdlib.h>
 #include <assert.h>
+#include <stdbool.h>
 
 #ifdef DEBUG_CHECK
-const int ERROR_CNT = 13;
+static const int ERROR_CNT = 13;
 #else
-const int ERROR_CNT = 6;
+static const int ERROR_CNT = 6;
 #endif
 
-const double VENOM_ELEM = -13;
-const size_t VENOM_SIZE = 0;
+static const double VENOM_ELEM = -13;
+static const size_t VENOM_SIZE = 0;
 
-const size_t REALLOC_FACTOR_DECREASE = 2;
-const size_t REALLOC_DECREASE_CHECK = 4;
+static const size_t REALLOC_FACTOR_DECREASE = 2;
+static const size_t REALLOC_DECREASE_CHECK = 4;
 
 #define ELEM_MOD "%.2lf"
 typedef double ELEM_T;
 
 #ifdef DEBUG_CHECK
-const unsigned long long CANARY = 0xab0baab0baab0ba;
-const unsigned long long CANARY_STR = 0xdeaddeaddeaddead;
+static const unsigned long long CANARY = 0xab0baab0baab0ba;
+static const unsigned long long CANARY_STR = 0xdeaddeaddeaddead;
 typedef unsigned long long CANARY_T;
 typedef unsigned long long HASH_TYPE;
 #endif
@@ -46,7 +47,7 @@ enum code_error
 #endif
 };
 
-struct Stack
+typedef struct Stack
 {
 #ifdef DEBUG_CHECK
 	CANARY_T canary_str_l;
@@ -59,7 +60,7 @@ struct Stack
 	HASH_TYPE hash = STACK_VALUE_DEFAULT;
 	CANARY_T canary_str_r;
 #endif
-};
+} Stack;
 
 int StackCtor(Stack *stk, size_t capacity);
 int StackDtor(Stack *stk);
